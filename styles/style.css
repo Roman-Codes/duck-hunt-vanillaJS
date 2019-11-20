@@ -8,16 +8,28 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 
 html{
     background:teal;
-    position: relative;
     /* cursor: url(../sources/crosshair.png), auto; */
 }
 
+body{
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
 
 .duck{
+    top:100px;
     width: calc(113px / 3);
     height: 28px;
     animation: fly 1s steps(3) infinite;
     position: absolute;
+}
+
+.backdrop{
+    max-width: 100vw;
+    overflow-x:hidden;
+    position: absolute;
+    bottom:0;
 }
 
 .duck-black-h{background:url(../sprites/black-h.png);}
@@ -28,7 +40,7 @@ html{
 
 .duck-black-d{background:url(../sprites/black-d.png);}
 
-/* .duck-blue-d{background:url(../sprites/blue-d.png);}
+.duck-blue-d{background:url(../sprites/blue-d.png);}
 
 .duck-brown-d{background:url(../sprites/brown-d.png);}
 
@@ -36,7 +48,7 @@ html{
 
 .duck-blue-up{background:url(../sprites/blue-up.png);}
 
-.duck-brown-up{background:url(../sprites/brown-up.png);} */
+.duck-brown-up{background:url(../sprites/brown-up.png);}
 
 @keyframes fly{
     100%{background-position: -113px;}

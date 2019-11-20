@@ -8,7 +8,18 @@ let posY = 0;
 let directionX = true;
 let dead = false;
 
-const allDucks = document.querySelectorAll('div.duck');
+const addDuck = () => {
+    const duckId = Math.floor(Math.random()*100);
+    const field = document.querySelector('body');
+    const duck = document.createElement('div')
+    duck.className = 'duck duck-blue-h';
+    duck.id = duckId;
+    field.appendChild(duck);
+    move(duckId, 30);
+    duck.addEventListener('click', kill);
+}
+
+
 
 const kill = e => {
     console.log(e.target);
@@ -21,10 +32,6 @@ const kill = e => {
     setTimeout(() => {e.target.style.background = 'url(./sprites/brown-down.png)'}, 1500);
 
 }
-
-allDucks.forEach( duck => {
-    duck.addEventListener('click', kill);
-});
 
 const fall = (id) => {
     const element = document.getElementById(id);
@@ -79,4 +86,5 @@ const switchDirection = (id) =>{
 
 // move('duck-1', 10);
 // move('duck-2', 20);
-move('duck-3', 30);
+// move('duck-3', 30);
+addDuck();
