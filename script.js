@@ -7,19 +7,57 @@ let posX = 0;
 let posY = 0;
 let directionX = true;
 let dead = false;
+const duckType = [
+    {
+        color:'blue',
+        speed:20
+    },{
+        color:'black',
+        speed:10
+    },{
+        color:'brown',
+        speed: 30
+    }
+];
 
-const addDuck = () => {
-    const duckId = Math.floor(Math.random()*100);
-    const field = document.querySelector('body');
-    const duck = document.createElement('div')
-    duck.className = 'duck duck-blue-h';
-    duck.id = duckId;
-    field.appendChild(duck);
-    move(duckId, 30);
-    duck.addEventListener('click', kill);
+const currentDucks = [];
+
+const randomDuckType = () => {
+    const randomIndex = Math.floor((Math.random() * 100) / 33);
+    return duckType[randomIndex];
 }
 
+const createDuck = () => {
+    const duckType = randomDuckType();
+    const duckId = Math.floor(Math.random()*100) + `${duckType.color}`;
+    const duck = document.createElement('div')
+    duck.className = `duck duck-${duckType.color}-h`;
+    duck.id = duckId;
+    currentDucks.push({
+        color:duckType.color,
+        id: duckId,
+        speed: duckType.speed
+    });
+    return duck;
+}
 
+const getSpeed = (duckId) => {
+    currentDucks.find( duck => {
+        if (duck.id === duckId){
+            return duck.speed
+        }
+    });
+}
+
+const addDuck = () => {
+    const field = document.querySelector('body');
+    const duck = createDuck();
+    field.appendChild(duck);
+    speed = getSpeed(duck.id);
+    console.log(speed);
+    move(duck.id, 10);
+    duck.addEventListener('click', kill);
+}
 
 const kill = e => {
     console.log(e.target);
@@ -30,7 +68,6 @@ const kill = e => {
     element.style.animationName = 'none';
     // need to remove event listener here
     setTimeout(() => {e.target.style.background = 'url(./sprites/brown-down.png)'}, 1500);
-
 }
 
 const fall = (id) => {
